@@ -5,6 +5,10 @@ const GET = 'get';
 const DELETE = 'delete';
 const PUT = 'put';
 
+const pong = (req,res) => {
+    res.send('PONG')
+}
+
 const routes = [
     {
         path: '/item',
@@ -25,6 +29,11 @@ const routes = [
         path:'/item',
         method:GET,
         handler: Items.get
+    },
+    {
+      path:'/ping',
+      method:GET,
+      handler:pong
     }
 ]
 
