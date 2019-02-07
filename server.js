@@ -37,11 +37,25 @@ const routes = [
     }
 ]
 
-
-const server = (app) => {
+const server = (app,io) => {
     routes.forEach(({method, path, handler}) => {
         app[method](path, handler)
     })
+
+    io.on('connection', async function(socket){
+        console.log('a user connected');
+        socket.emit('incwancwa','Leshisako')
+        let items = await Items.model.find({})
+        socket.emit('items',items)
+        Items.listener.on("pay",async _=>{
+            let items = await Items.model.find({})
+            socket.emit('items',items)
+        })
+        Items.listener.on("created",(document)=>{
+            console.log("Item event")
+            socket.emit('item',document)
+        })
+    });
 }
 
 exports.server = server
