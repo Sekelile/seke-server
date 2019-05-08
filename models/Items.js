@@ -26,6 +26,8 @@ const create = async( req, res ) => {
       bar_code
     } )
     if ( existing_item ) {
+      existing_item.quantity+=quantity
+      await existing_item.save()
       return res.send( existing_item )
     }
     const items = await Item.create( {
