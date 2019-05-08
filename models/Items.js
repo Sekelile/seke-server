@@ -13,7 +13,7 @@ var itemSchema = new Schema( {
   price: Number,
   bar_code: String,
   quantity: Number,
-  bought: Number
+  bought: {type:Number,default:0}
 } );
 
 const Item = mongoose.model( 'Item', itemSchema )
